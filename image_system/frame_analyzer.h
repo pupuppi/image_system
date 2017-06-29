@@ -11,7 +11,7 @@ private:
 public:
     struct Result {
         double skinRate;
-
+        cv::Point center;
     };
 
     FrameAnalyzer() {
@@ -51,9 +51,12 @@ public:
         inRange(masked, Scalar(0, 30, 40), Scalar(40, 240, 240), skin);
 
         Result result;
+        
+        result.skinRate = mean(skin)[0]/255;
 
-        // skin ‚ð‚¢‚¶‚ê‚Î‚¢‚¢Š´‚¶‚É‚È‚é‚æ
-        result.skinRate = mean(skin)[0];
+        const auto m = moments(skin, true);
+        result.center = Point(m.m10 / m.m00, m.m01 / m.m00);
+        circle(skin, result.center, 10, Scalar(130), -1);
 
         imshow("skin", skin);
 
