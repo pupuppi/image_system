@@ -17,7 +17,7 @@ auto main() -> int {
     }
 
     FrameAnalyzer fa;
-	ScreenBroker sb("back.png");
+    //ScreenBroker sb("back.png");
 
     Mat frame;
 
@@ -25,12 +25,9 @@ auto main() -> int {
         cap >> frame;
 
         const double skinRate = fa.analyze(frame);
-		sb.update_vector(skinRate);
-		
-        int key = waitKey(2);
-        if (key == 27) {
-            break;
-        }
+        //sb.update_vector(skinRate);
+
+        if (skinRate == -1) break;
     }
 
     return 0;

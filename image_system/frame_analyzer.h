@@ -41,11 +41,29 @@ public:
         bgs->apply(target, fore);
         target.copyTo(masked, fore);
 
-        cvtColor(masked, masked, COLOR_BGR2HSV);
+        Mat masked2;
+        cvtColor(masked, masked2, COLOR_BGR2HSV);
         Mat skin;
-        inRange(masked, Scalar(0, 30, 40), Scalar(40, 240, 240), skin);
+        inRange(masked2, Scalar(0, 30, 40), Scalar(40, 240, 240), skin);
+
+        imshow("target", target);
+        imshow("masked", masked);
+        imshow("skin", skin);
         
-        const double skinRate = mean(skin)[0]/255;
+        double skinRate = 0;
+        int key = waitKey(2);
+        if (key == 27) {
+            skinRate = -1;
+        } else if (key == 'a') {
+            int k = waitKey(0);
+            if (k == 's') {
+                imwrite("target.png", target);
+                imwrite("masked.png", masked);
+                imwrite("skin.png", skin);
+            }
+        }
+        
+        //const double skinRate = mean(skin)[0]/255;
         return skinRate;
     }
 
