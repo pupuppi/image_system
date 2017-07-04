@@ -13,15 +13,17 @@ class ScreenBroker {
 private:
 	vector<double> skinRateVector;
 	Mat crackOrg, back;
-	double thValue = 0.35;
-	int thIndex = 2;
 
 public:
 	ScreenBroker(const char *backPath) {
 		skinRateVector.assign(5, 0.0);
-		constexpr char* crackPath = "crack.png";
+
+		constexpr char* crackPath = "crack2.png";
 		crackOrg = imread(crackPath, cv::IMREAD_UNCHANGED);
 		back = imread(backPath);
+
+        namedWindow("back", WINDOW_NORMAL);
+        setWindowProperty("back", WND_PROP_FULLSCREEN, WINDOW_FULLSCREEN);
 		imshow("back", back);
 		srand(time(NULL));
 	}
@@ -32,7 +34,11 @@ public:
 		check_punch(skinRateVector);
 	}
 
+private:
 	void check_punch(vector<double> vec) {
+        constexpr double thValue = 0.25;
+        constexpr int thIndex = 2;
+
 		vector<double>::iterator minItr = min_element(vec.begin(), vec.end());
 		vector<double>::iterator maxItr = max_element(vec.begin(), vec.end());
 					
@@ -70,7 +76,6 @@ public:
 
 		//ƒ`ƒƒƒ“ƒlƒ‹‚É•ª‰ð
 		vector<Mat> planes_rgb, planes_aaa, planes_rgba, planes_1ma;
-		//Mat* planes_rgba;
 		Mat crack_rgb, crack_aaa, back_1ma;
 		int maxVal = pow(2, 8 * back.elemSize1()) - 1;
 		split(alpha0, planes_rgba);
@@ -97,7 +102,7 @@ public:
 		Mat backGau;
 		GaussianBlur(back, backGau, cv::Size(51, 3), 80, 3); //—h‚ç‚·
 		imshow("back", backGau);
-		int key = waitKey(100);
+		waitKey(100);
 		imshow("back", back);
 
 	}

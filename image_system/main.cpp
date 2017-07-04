@@ -24,8 +24,8 @@ auto main() -> int {
     while (true) {
         cap >> frame;
 
-        auto result = fa.analyze(frame);
-		sb.update_vector(result.skinRate);
+        const double skinRate = fa.analyze(frame);
+		sb.update_vector(skinRate);
 		
         int key = waitKey(2);
         if (key == 27) {
