@@ -20,24 +20,11 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="haarcascade_frontalface_default.xml">
-      <Filter>リソース ファイル</Filter>
-    </Xml>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="frame_analyzer.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="speed_checker.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="..\..\..\Picture\crack.png">
-      <Filter>リソース ファイル</Filter>
-    </Image>
-    <Image Include="..\..\..\Picture\back.png">
-      <Filter>リソース ファイル</Filter>
-    </Image>
   </ItemGroup>
 </Project>

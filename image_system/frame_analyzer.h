@@ -10,7 +10,7 @@ private:
 
 public:
     FrameAnalyzer() {
-        constexpr char* cascadePath = "haarcascade_frontalface_default.xml";
+        constexpr char* cascadePath = "res/haarcascade_frontalface_default.xml";
         if (!cc.load(cascadePath)) {
             exit(2);
         }
@@ -44,7 +44,7 @@ public:
         cvtColor(masked, masked, COLOR_BGR2HSV);
         Mat skin;
         inRange(masked, Scalar(0, 30, 40), Scalar(40, 240, 240), skin);
-        
+
         const double skinRate = mean(skin)[0]/255;
         return skinRate;
     }
