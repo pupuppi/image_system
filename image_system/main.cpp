@@ -16,22 +16,27 @@ auto main() -> int {
         exit(1);
     }
 
-    constexpr char* slides[] = {
+    /*constexpr char* slides[] = {
         "res/slide1.PNG",
         "res/slide2.PNG",
         "res/slide3.PNG",
         "res/slide4.PNG"
-    };
+    };*/
     //for 4:3
-   /* constexpr char* slides[] = {
+    constexpr char* slides[] = {
         "res/s1.PNG",
         "res/s2.PNG",
         "res/s3.PNG",
         "res/s4.PNG"
-    };*/
+    };
 
     bool isBreakable = false;
     int pos = 0;
+
+    // --- 2nd window ‚Éo‚·Žž‚¾‚¯moveWindow‚ð—LŒø‚É
+    namedWindow("back", WINDOW_NORMAL);
+    //moveWindow("back", 1920, 0);
+    setWindowProperty("back", WND_PROP_FULLSCREEN, WINDOW_FULLSCREEN);
 
     FrameAnalyzer fa;
     ScreenBroker sb(slides[0]);
@@ -56,6 +61,7 @@ auto main() -> int {
             sb = ScreenBroker(slides[--pos]);
         } else if (key == 'c') {
             isBreakable = !isBreakable;
+            cout << "isBreakble: " << isBreakable << endl;
         }
     }
 

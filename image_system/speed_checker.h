@@ -22,9 +22,6 @@ public:
         crackOrg = imread(crackPath, cv::IMREAD_UNCHANGED);
         back = imread(backPath);
 
-        namedWindow("back", WINDOW_NORMAL);
-        moveWindow("back", 1920, 0);
-        setWindowProperty("back", WND_PROP_FULLSCREEN, WINDOW_FULLSCREEN);
         imshow("back", back);
         srand(time(NULL));
     }
