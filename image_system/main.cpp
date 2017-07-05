@@ -22,17 +22,24 @@ auto main() -> int {
         "res/slide3.PNG",
         "res/slide4.PNG"
     };
-    int state = 0;
+    //for 4:3
+   /* constexpr char* slides[] = {
+        "res/s1.PNG",
+        "res/s2.PNG",
+        "res/s3.PNG",
+        "res/s4.PNG"
+    };*/
 
+    bool isBreakable = false;
+    int pos = 0;
 
     FrameAnalyzer fa;
     ScreenBroker sb(slides[0]);
 
     Mat frame;
     while (true) {
-        if (state != 0) {
+        if (isBreakable) {
             cap >> frame;
-
 
             const double skinRate = fa.analyze(frame);
             sb.update_vector(skinRate);
@@ -43,12 +50,12 @@ auto main() -> int {
         int key = waitKey(2);
         if (key == 27) {
             break;
-        } else if ((key == 13 || key =='a') && state < 3) {
-            ++state;
-            sb = ScreenBroker(slides[state]);
-        } else if (key == 'b' && state > 0) {
-            --state;
-            sb = ScreenBroker(slides[state]);
+        } else if ((key == 13 || key =='a') && pos < 3) {
+            sb = ScreenBroker(slides[++pos]);
+        } else if (key == 'b' && pos > 0) {
+            sb = ScreenBroker(slides[--pos]);
+        } else if (key == 'c') {
+            isBreakable = !isBreakable;
         }
     }
 
